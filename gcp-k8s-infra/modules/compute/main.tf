@@ -5,7 +5,7 @@ resource "google_container_cluster" "cluster_1" {
 
   node_locations = [var.zone]
 
-  initial_node_count = 1
+  initial_node_count = 2
 
   min_master_version = "1.34.4-gke.1047000"
 
