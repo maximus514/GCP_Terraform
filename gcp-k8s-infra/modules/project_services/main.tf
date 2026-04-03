@@ -34,4 +34,10 @@ resource "google_project_service" "monitoring" {
   disable_on_destroy = false
 }
 
+resource "google_project_service" "containerregistry" {
+  project            = var.project_id
+  service            = "containerregistry.googleapis.com"
+  disable_on_destroy = false
+}
+
 
