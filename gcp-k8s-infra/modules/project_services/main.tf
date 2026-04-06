@@ -39,5 +39,3 @@ resource "google_project_service" "containerregistry" {
   service            = "containerregistry.googleapis.com"
   disable_on_destroy = false
 }
-
-

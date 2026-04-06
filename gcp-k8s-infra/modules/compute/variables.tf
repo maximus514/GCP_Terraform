@@ -19,3 +19,9 @@ variable "name" {
 variable "region" {
   type = string
 }
+variable "nodes" {
+  type = string
+}
+variable "zones" {
+  type = list(string)
+}

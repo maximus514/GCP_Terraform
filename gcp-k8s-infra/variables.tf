@@ -10,7 +10,10 @@ variable "zones" {
   description = "List of zones for the GKE cluster"
   type        = list(string)
 }
-
+variable "zone" {
+  description = "The zone for the GKE cluster"
+  type        = string
+}
 variable "cluster_name" {
   type = string 
 }
@@ -33,4 +36,7 @@ variable "vpc-name" {
 
 variable "subnet-name" {
   type = string
+}
+variable "nodes" {
+  type = number
 }

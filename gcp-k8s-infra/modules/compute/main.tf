@@ -2,10 +2,9 @@ resource "google_container_cluster" "cluster_1" {
 
   name     = var.cluster_name
   location = var.region
-
-  node_locations = [var.zone]
-
-  initial_node_count = 2
+  initial_node_count = 1
+  remove_default_node_pool = true
+  node_locations = [var.zones[0], var.zones[1]]
 
   min_master_version = "1.34.4-gke.1047000"
 
@@ -59,35 +58,23 @@ resource "google_container_cluster" "cluster_1" {
       enabled = true
     }
   }
+}
+
+resource "google_container_node_pool" "primary_nodes" {
+
+  name       = "primary-node-pool"
+  cluster    = google_container_cluster.cluster_1.name
+  location   = var.region
 
   node_config {
-    
     machine_type = var.machine_type
     image_type   = "COS_CONTAINERD"
     disk_type    = "pd-standard"
     disk_size_gb = 100
-
-    metadata = {
-      disable-legacy-endpoints = "true"
-    }
-
-    oauth_scopes = [
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
-      "https://www.googleapis.com/auth/devstorage.read_only",
-      "https://www.googleapis.com/auth/servicecontrol",
-      "https://www.googleapis.com/auth/service.management.readonly",
-      "https://www.googleapis.com/auth/trace.append"
-    ]
+    preemptible  = false
   }
-
-  maintenance_policy {
-    daily_maintenance_window {
-      start_time = "03:00"
-    }
+  autoscaling {
+    min_node_count = 2
+    max_node_count = 4
   }
-
-    binary_authorization {
-      evaluation_mode = "DISABLED"
-    }
-  }
+}

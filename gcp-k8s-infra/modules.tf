@@ -16,7 +16,9 @@ module "compute" {
   name         = var.name
   cluster_name = var.name
   region       = var.region
-  zone         = var.zones[0] # Use the first zone from the list
+  zone         = var.zone
+  zones        = var.zones
+  nodes        = var.nodes
   machine_type = var.machine_type
   network_self_link = module.network.network_self_link
   subnet_self_link  = module.network.subnet_self_link
