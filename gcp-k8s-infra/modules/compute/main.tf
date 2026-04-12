@@ -16,7 +16,9 @@ resource "google_container_cluster" "cluster_1" {
   release_channel {
     channel = "REGULAR"
   }
-
+  gateway_api_config {
+    channel = "STANDARD"
+  }
   ip_allocation_policy {
     cluster_ipv4_cidr_block  = "/21"
     services_ipv4_cidr_block = "10.0.2.0/23"
