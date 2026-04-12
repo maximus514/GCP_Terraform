@@ -52,7 +52,7 @@ resource "google_container_cluster" "cluster_1" {
   enable_intranode_visibility = false
 
   workload_identity_config {
-    workload_pool = "maximus-dev-01.svc.id.goog"
+    workload_pool = "PROJECT_ID.svc.id.goog" ## Mod this line 
   }
 
   monitoring_config {
